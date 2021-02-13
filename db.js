@@ -33,6 +33,22 @@ const things = db.define("things", {
   },
 });
 
+const purchases=db.define('purchases',{
+  count:{
+    type:INTEGER,
+    allowNull:false
+  },
+  date:{
+    type:DATE,
+    allowNull:false
+  }
+})
+
+purchases.belongsTo(places)
+purchases.belongsTo(things)
+purchases.belongsTo(people)
+people.hasMany(purchases)
+
 const init = async () => {
   try {
     await db.sync({ force: true });
